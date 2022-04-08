@@ -23,54 +23,31 @@ export default{
         {
             path: '/home',
             component: Home,
-            beforeEnter: async (to, from, next) => {
-
-                await axios.get('/api/authenticate')
-                .then((res) => {
-
-                    if(res.status === 200 && res.statusText === 'OK'){
-                        next()
-                    }
-                })
-                .catch(() => {
-                    return next({path: '/'})
-                })
-            }
+            beforeEnter: routeGuard
         },
         {
             path: '/pokemon/details/:id',
             component: PokemonDetails,
-            beforeEnter: async (to, from, next) => {
-
-                await axios.get('/api/authenticate')
-                .then((res) => {
-
-                    if(res.status === 200 && res.statusText === 'OK'){
-                        next()
-                    }
-                })
-                .catch(() => {
-                    return next({path: '/'})
-                })
-            }
+            beforeEnter: routeGuard
         },
         ,
         {
             path: '/my-profile',
             component: MyProfile,
-            beforeEnter: async (to, from, next) => {
-
-                await axios.get('/api/authenticate')
-                .then((res) => {
-
-                    if(res.status === 200 && res.statusText === 'OK'){
-                        next()
-                    }
-                })
-                .catch(() => {
-                    return next({path: '/'})
-                })
-            }
+            beforeEnter: routeGuard
         }
     ]
+}
+
+function routeGuard(to, from, next){
+    axios.get('/api/authenticate')
+    .then((res) => {
+
+        if(res.status === 200 && res.statusText === 'OK'){
+            next()
+        }
+    })
+    .catch(() => {
+        return next({path: '/'})
+    })
 }

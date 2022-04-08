@@ -3488,20 +3488,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_SignIn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/SignIn */ "./resources/js/components/SignIn.vue");
-/* harmony import */ var _components_SignUp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/SignUp */ "./resources/js/components/SignUp.vue");
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
-/* harmony import */ var _components_PageNotFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/PageNotFound */ "./resources/js/components/PageNotFound.vue");
-/* harmony import */ var _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/PokemonDetails */ "./resources/js/components/PokemonDetails.vue");
-/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _components_SignIn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/SignIn */ "./resources/js/components/SignIn.vue");
+/* harmony import */ var _components_SignUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/SignUp */ "./resources/js/components/SignUp.vue");
+/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
+/* harmony import */ var _components_PageNotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/PageNotFound */ "./resources/js/components/PageNotFound.vue");
+/* harmony import */ var _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/PokemonDetails */ "./resources/js/components/PokemonDetails.vue");
+/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue");
 
 
 
@@ -3512,117 +3504,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mode: 'history',
   routes: [{
     path: '*',
-    component: _components_PageNotFound__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _components_PageNotFound__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/',
-    component: _components_SignIn__WEBPACK_IMPORTED_MODULE_1__["default"]
+    component: _components_SignIn__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
     path: '/sign-up',
-    component: _components_SignUp__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_SignUp__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, {
     path: '/home',
-    component: _components_Home__WEBPACK_IMPORTED_MODULE_3__["default"],
-    beforeEnter: function () {
-      var _beforeEnter = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(to, from, next) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get('/api/authenticate').then(function (res) {
-                  if (res.status === 200 && res.statusText === 'OK') {
-                    next();
-                  }
-                })["catch"](function () {
-                  return next({
-                    path: '/'
-                  });
-                });
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      function beforeEnter(_x, _x2, _x3) {
-        return _beforeEnter.apply(this, arguments);
-      }
-
-      return beforeEnter;
-    }()
+    component: _components_Home__WEBPACK_IMPORTED_MODULE_2__["default"],
+    beforeEnter: routeGuard
   }, {
     path: '/pokemon/details/:id',
-    component: _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_5__["default"],
-    beforeEnter: function () {
-      var _beforeEnter2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(to, from, next) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get('/api/authenticate').then(function (res) {
-                  if (res.status === 200 && res.statusText === 'OK') {
-                    next();
-                  }
-                })["catch"](function () {
-                  return next({
-                    path: '/'
-                  });
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function beforeEnter(_x4, _x5, _x6) {
-        return _beforeEnter2.apply(this, arguments);
-      }
-
-      return beforeEnter;
-    }()
+    component: _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_4__["default"],
+    beforeEnter: routeGuard
   },, {
     path: '/my-profile',
-    component: _components_Profile__WEBPACK_IMPORTED_MODULE_6__["default"],
-    beforeEnter: function () {
-      var _beforeEnter3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(to, from, next) {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return axios.get('/api/authenticate').then(function (res) {
-                  if (res.status === 200 && res.statusText === 'OK') {
-                    next();
-                  }
-                })["catch"](function () {
-                  return next({
-                    path: '/'
-                  });
-                });
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }));
-
-      function beforeEnter(_x7, _x8, _x9) {
-        return _beforeEnter3.apply(this, arguments);
-      }
-
-      return beforeEnter;
-    }()
+    component: _components_Profile__WEBPACK_IMPORTED_MODULE_5__["default"],
+    beforeEnter: routeGuard
   }]
 });
+
+function routeGuard(to, from, next) {
+  axios.get('/api/authenticate').then(function (res) {
+    if (res.status === 200 && res.statusText === 'OK') {
+      next();
+    }
+  })["catch"](function () {
+    return next({
+      path: '/'
+    });
+  });
+}
 
 /***/ }),
 
