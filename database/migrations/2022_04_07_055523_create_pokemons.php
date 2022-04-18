@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('pokemon_id');
             $table->string('name');
             $table->tinyInteger('isLike');
+            $table->tinyInteger('isFavorate');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });

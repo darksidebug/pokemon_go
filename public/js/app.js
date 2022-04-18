@@ -2167,6 +2167,216 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['pokemon', 'img_sourse']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _CollectionList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollectionList */ "./resources/js/components/CollectionList.vue");
+/* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar */ "./resources/js/components/Navbar.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    'collection-list': _CollectionList__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'navigation-bar': _Navbar__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      apiUrl: "https://pokeapi.co/api/v2/",
+      imgUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
+      pokemons: [],
+      id: null
+    };
+  },
+  methods: {
+    getAuthenticatedUser: function getAuthenticatedUser() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/user').then(function (res) {
+                  _this.id = res.data.id;
+                })["catch"](function (error) {
+                  console.log(error);
+                  alert('Warning: Please contact the developer.');
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    fetchPokemonCollection: function fetchPokemonCollection() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('api/my-collections', {
+                  user_id: _this2.id
+                }).then(function (res) {
+                  if (res.status === 200) {
+                    res.data.pokemons.forEach(function (pokemon) {
+                      _this2.pokemons.push({
+                        id: '',
+                        name: '',
+                        pokemon_id: pokemon.pokemon_id,
+                        like: pokemon.isLike,
+                        loved: pokemon.isFavorate
+                      });
+
+                      _this2.fetchPokemonDetails(pokemon.pokemon_id);
+                    });
+                  }
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    fetchPokemonDetails: function fetchPokemonDetails(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get(_this3.apiUrl + 'pokemon/' + id).then(function (res) {
+                  if (res.status === 200) {
+                    _this3.pokemons.forEach(function (pokemon) {
+                      if (pokemon.pokemon_id === res.data.id) {
+                        pokemon.id = res.data.id;
+                        pokemon.name = res.data.name;
+                      }
+                    });
+                  }
+
+                  console.log(_this3.pokemons);
+                })["catch"](function (error) {
+                  console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    }
+  },
+  created: function created() {
+    var _this4 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _this4.getAuthenticatedUser();
+
+            case 2:
+              _context4.next = 4;
+              return _this4.fetchPokemonCollection();
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -2337,6 +2547,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     logout: function logout() {
@@ -2349,6 +2561,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.post('/api/sign-out').then(function () {
+                  localStorage.removeItem('token');
+
                   _this.$router.push({
                     path: '/'
                   });
@@ -2476,6 +2690,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2492,11 +2728,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       moves: [],
       isLikeSubmitted: false,
       isDislikeSubmitted: false,
+      isAddToFavorate: false,
+      user_id: null,
       form: {
         id: this.$route.params.id,
         name: null
       },
       usersLikeThisPokemon: [],
+      usersLovedThisPokemon: [],
       usersDislikeThisPokemon: [],
       errors: []
     };
@@ -2560,6 +2799,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (res.status === 200 && res.statusText == 'OK') {
                     _this2.isLikeSubmitted = false;
                     alert('Pokemon added to likes.');
+
+                    _this2.getUsersLikedThisPokemon();
+
+                    _this2.getUsersDislikedThisPokemon();
+
+                    _this2.getUsersLovedThisPokemon();
                   }
                 })["catch"](function (error) {
                   _this2.isLikeSubmitted = false;
@@ -2600,7 +2845,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
 
                   if (res.status === 200 && res.statusText == 'OK') {
+                    _this3.isDisikeSubmitted = false;
                     alert('Pokemon added to dislikes.');
+
+                    _this3.getUsersLikedThisPokemon();
+
+                    _this3.getUsersDislikedThisPokemon();
+
+                    _this3.getUsersLovedThisPokemon();
                   }
                 })["catch"](function (error) {
                   _this3.isDisikeSubmitted = false;
@@ -2615,7 +2867,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    changeToDislikePokemon: function changeToDislikePokemon() {
+    addToFavorate: function addToFavorate() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -2623,18 +2875,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
-                return axios.post('/api/change-to-dislike', _this4.form).then(function (res) {
+                _this4.isAddToFavorate = true;
+                _context4.next = 3;
+                return axios.post('/api/add-to-favorate', _this4.form).then(function (res) {
+                  if (res.data.status === 405 && res.data.statusText == 'Not Allowed') {
+                    alert('Warning: ' + res.data.err);
+                    _this4.isAddToFavorate = false;
+                    return;
+                  }
+
+                  if (res.data.status === 406 && res.data.statusText == 'Not Allowed') {
+                    if (confirm('Warning: ' + res.data.err)) {
+                      _this4.changeToFavorate();
+                    }
+
+                    return;
+                  }
+
                   if (res.status === 200 && res.statusText == 'OK') {
-                    _this4.isDislikeSubmitted = false;
-                    alert('Pokemon where added to dislikes.');
+                    _this4.isAddToFavorate = false;
+
+                    _this4.getUsersLikedThisPokemon();
+
+                    _this4.getUsersDislikedThisPokemon();
+
+                    _this4.getUsersLovedThisPokemon();
+
+                    alert('Pokemon added to favorates.');
                   }
                 })["catch"](function (error) {
-                  _this4.isDislikeSubmitted = false;
+                  _this4.isAddToFavorate = false;
                   alert("Error: Please contact the developer.");
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -2642,7 +2916,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    changeToLikePokemon: function changeToLikePokemon() {
+    changeToDislikePokemon: function changeToDislikePokemon() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -2651,13 +2925,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return axios.post('/api/change-to-like', _this5.form).then(function (res) {
+                return axios.post('/api/change-to-dislike', _this5.form).then(function (res) {
                   if (res.status === 200 && res.statusText == 'OK') {
-                    _this5.isLikeSubmitted = false;
+                    _this5.isDislikeSubmitted = false;
                     alert('Pokemon where added to dislikes.');
+
+                    _this5.getUsersLikedThisPokemon();
+
+                    _this5.getUsersDislikedThisPokemon();
+
+                    _this5.getUsersLovedThisPokemon();
                   }
                 })["catch"](function (error) {
-                  _this5.isLikeSubmitted = false;
+                  _this5.isDislikeSubmitted = false;
                   alert("Error: Please contact the developer.");
                 });
 
@@ -2669,7 +2949,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5);
       }))();
     },
-    getUser: function getUser() {
+    changeToFavorate: function changeToFavorate() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
@@ -2678,8 +2958,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.next = 2;
-                return axios.get('/api/user').then(function (res) {
-                  _this6.form.name = _this6.name;
+                return axios.post('/api/change-to-favorate', _this6.form).then(function (res) {
+                  if (res.status === 200 && res.statusText == 'OK') {
+                    _this6.isAddToFavorate = false;
+                    alert('Pokemon where added to favorates.');
+
+                    _this6.getUsersLikedThisPokemon();
+
+                    _this6.getUsersDislikedThisPokemon();
+
+                    _this6.getUsersLovedThisPokemon();
+                  }
+                })["catch"](function (error) {
+                  _this6.isAddToFavorate = false;
+                  console.log(error);
+                  alert("Error: Please contact the developer.");
                 });
 
               case 2:
@@ -2690,7 +2983,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee6);
       }))();
     },
-    getUsersLikedThisPokemon: function getUsersLikedThisPokemon() {
+    changeToLikePokemon: function changeToLikePokemon() {
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
@@ -2699,9 +2992,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context7.prev = _context7.next) {
               case 0:
                 _context7.next = 2;
-                return axios.post('/api/users-liked-this-pokemon', _this7.form).then(function (res) {
-                  _this7.usersLikeThisPokemon = res.data.users;
+                return axios.post('/api/change-to-like', _this7.form).then(function (res) {
+                  if (res.status === 200 && res.statusText == 'OK') {
+                    _this7.isLikeSubmitted = false;
+                    alert('Pokemon where added to dislikes.');
+
+                    _this7.getUsersLikedThisPokemon();
+
+                    _this7.getUsersDislikedThisPokemon();
+
+                    _this7.getUsersLovedThisPokemon();
+                  }
                 })["catch"](function (error) {
+                  _this7.isLikeSubmitted = false;
                   alert("Error: Please contact the developer.");
                 });
 
@@ -2713,7 +3016,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee7);
       }))();
     },
-    getUsersDislikedThisPokemon: function getUsersDislikedThisPokemon() {
+    getUser: function getUser() {
       var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
@@ -2722,10 +3025,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context8.prev = _context8.next) {
               case 0:
                 _context8.next = 2;
-                return axios.post('/api/users-disliked-this-pokemon', _this8.form).then(function (res) {
-                  _this8.usersDislikeThisPokemon = res.data.users;
-                })["catch"](function (error) {
-                  alert("Error: Please contact the developer.");
+                return axios.get('/api/user').then(function (res) {
+                  _this8.form.name = _this8.name;
+                  _this8.user_id = res.data.id;
                 });
 
               case 2:
@@ -2735,37 +3037,113 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee8);
       }))();
+    },
+    getUsersLikedThisPokemon: function getUsersLikedThisPokemon() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _this9.usersLikeThisPokemon = [];
+                _context9.next = 3;
+                return axios.post('/api/users-liked-this-pokemon', _this9.form).then(function (res) {
+                  _this9.usersLikeThisPokemon = res.data.users;
+                })["catch"](function (error) {
+                  alert("Error: Please contact the developer.");
+                });
+
+              case 3:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }))();
+    },
+    getUsersLovedThisPokemon: function getUsersLovedThisPokemon() {
+      var _this10 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _this10.usersLovedThisPokemon = [];
+                _context10.next = 3;
+                return axios.post('/api/users-love-this-pokemon', _this10.form).then(function (res) {
+                  _this10.usersLovedThisPokemon = res.data.users;
+                })["catch"](function (error) {
+                  alert("Error: Please contact the developer.");
+                });
+
+              case 3:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10);
+      }))();
+    },
+    getUsersDislikedThisPokemon: function getUsersDislikedThisPokemon() {
+      var _this11 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                _this11.usersDislikeThisPokemon = [];
+                _context11.next = 3;
+                return axios.post('/api/users-disliked-this-pokemon', _this11.form).then(function (res) {
+                  _this11.usersDislikeThisPokemon = res.data.users;
+                })["catch"](function (error) {
+                  alert("Error: Please contact the developer.");
+                });
+
+              case 3:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11);
+      }))();
     }
   },
   created: function created() {
-    var _this9 = this;
+    var _this12 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
         while (1) {
-          switch (_context9.prev = _context9.next) {
+          switch (_context12.prev = _context12.next) {
             case 0:
-              _context9.next = 2;
-              return _this9.fetchPokemonDetails();
+              _context12.next = 2;
+              return _this12.fetchPokemonDetails();
 
             case 2:
-              _context9.next = 4;
-              return _this9.getUser();
+              _context12.next = 4;
+              return _this12.getUser();
 
             case 4:
-              _context9.next = 6;
-              return _this9.getUsersLikedThisPokemon();
+              _context12.next = 6;
+              return _this12.getUsersLikedThisPokemon();
 
             case 6:
-              _context9.next = 8;
-              return _this9.getUsersDislikedThisPokemon();
+              _context12.next = 8;
+              return _this12.getUsersDislikedThisPokemon();
 
             case 8:
+              _context12.next = 10;
+              return _this12.getUsersLovedThisPokemon();
+
+            case 10:
             case "end":
-              return _context9.stop();
+              return _context12.stop();
           }
         }
-      }, _callee9);
+      }, _callee12);
     }))();
   }
 });
@@ -2877,7 +3255,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       form: {
         searchInput: null
-      }
+      },
+      token: localStorage.getItem('token')
     };
   },
   methods: {
@@ -3111,12 +3490,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      id: null,
       email: null,
       firstname: null,
       lastname: null,
       birthdate: null,
       submitting: false,
       form: {
+        user_id: null,
         firstname: '',
         lastname: '',
         dateOfBirth: ''
@@ -3125,7 +3506,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getMyInfo: function getMyInfo() {
+    getAuthenticatedUser: function getAuthenticatedUser() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -3134,11 +3515,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/my-profile').then(function (res) {
-                  _this.email = res.data.info.email;
-                  _this.firstname = res.data.info.firstname;
-                  _this.lastname = res.data.info.lastname;
-                  _this.birthdate = res.data.info.birthdate;
+                return axios.get('/api/user').then(function (res) {
+                  _this.id = res.data.id;
                 })["catch"](function (error) {
                   console.log(error);
                   alert('Warning: Please contact the developer.');
@@ -3152,7 +3530,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    update: function update() {
+    getMyInfo: function getMyInfo() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -3160,46 +3538,84 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this2.submitting = true;
-                _context2.next = 3;
-                return axios.post('/api/update-my-profile', _this2.form).then(function (res) {
-                  if (res.status === 200 && res.statusText === 'OK') {
-                    _this2.submitting = false;
-
-                    _this2.getMyInfo();
-                  }
+                _context2.next = 2;
+                return axios.post('/api/my-profile', {
+                  user_id: _this2.id
+                }).then(function (res) {
+                  console.log(res);
+                  _this2.form.user_id = res.data.info.id;
+                  _this2.email = res.data.info.email;
+                  _this2.firstname = res.data.info.firstname;
+                  _this2.lastname = res.data.info.lastname;
+                  _this2.birthdate = res.data.info.birthdate;
                 })["catch"](function (error) {
                   console.log(error);
-                  _this2.submitting = false;
                   alert('Warning: Please contact the developer.');
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
       }))();
+    },
+    update: function update() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this3.submitting = true;
+                _context3.next = 3;
+                return axios.post('/api/update-my-profile', _this3.form).then(function (res) {
+                  if (res.status === 200 && res.statusText === 'OK') {
+                    _this3.submitting = false;
+                    alert('Profile updated.');
+
+                    _this3.getMyInfo();
+                  }
+
+                  console.log(_this3.form);
+                })["catch"](function (error) {
+                  console.log(error);
+                  _this3.submitting = false;
+                  _this3.errors = error.response.data.errors;
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.next = 2;
-              return _this3.getMyInfo();
+              _context4.next = 2;
+              return _this4.getAuthenticatedUser();
 
             case 2:
+              _context4.next = 4;
+              return _this4.getMyInfo();
+
+            case 4:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }))();
   }
 });
@@ -3288,7 +3704,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.submitting = true;
                 _context.next = 3;
                 return axios.post('/api/login', _this.form).then(function (res) {
+                  console.log(res);
+
                   if (res.status === 200 && res.statusText === 'OK') {
+                    localStorage.setItem('token', res.data);
+
                     _this.$router.push({
                       path: '/home'
                     });
@@ -3306,7 +3726,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    getSanctumCSRFCookie: function getSanctumCSRFCookie() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                axios.get('/sanctum/csrf-cookie').then(function (response) {
+                  console.log(response);
+                });
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
+  },
+  created: function created() {
+    this.getSanctumCSRFCookie();
   }
 });
 
@@ -3472,8 +3913,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpsRequest';
+
+window.axios.defaults.headers.common['Authorization'] = "Bearer ".concat(localStorage.getItem('token'));
 
 /***/ }),
 
@@ -3494,6 +3936,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PageNotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/PageNotFound */ "./resources/js/components/PageNotFound.vue");
 /* harmony import */ var _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/PokemonDetails */ "./resources/js/components/PokemonDetails.vue");
 /* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.vue");
+/* harmony import */ var _components_Collections__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Collections */ "./resources/js/components/Collections.vue");
+
 
 
 
@@ -3507,7 +3951,8 @@ __webpack_require__.r(__webpack_exports__);
     component: _components_PageNotFound__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/',
-    component: _components_SignIn__WEBPACK_IMPORTED_MODULE_0__["default"]
+    component: _components_SignIn__WEBPACK_IMPORTED_MODULE_0__["default"],
+    beforeEnter: checkLoginToken
   }, {
     path: '/sign-up',
     component: _components_SignUp__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -3519,23 +3964,37 @@ __webpack_require__.r(__webpack_exports__);
     path: '/pokemon/details/:id',
     component: _components_PokemonDetails__WEBPACK_IMPORTED_MODULE_4__["default"],
     beforeEnter: routeGuard
-  },, {
+  }, {
     path: '/my-profile',
     component: _components_Profile__WEBPACK_IMPORTED_MODULE_5__["default"],
+    beforeEnter: routeGuard
+  }, {
+    path: '/my-collections',
+    component: _components_Collections__WEBPACK_IMPORTED_MODULE_6__["default"],
     beforeEnter: routeGuard
   }]
 });
 
 function routeGuard(to, from, next) {
-  axios.get('/api/authenticate').then(function (res) {
-    if (res.status === 200 && res.statusText === 'OK') {
-      next();
-    }
-  })["catch"](function () {
+  var token = localStorage.getItem('token');
+
+  if (token === '' || token === undefined || token === null) {
     return next({
       path: '/'
     });
-  });
+  } else {
+    next();
+  }
+}
+
+function checkLoginToken(to, from, next) {
+  var token = localStorage.getItem('token');
+
+  if (token !== '' || token !== undefined || token !== null) {
+    return next({
+      path: '/home'
+    });
+  }
 }
 
 /***/ }),
@@ -21723,6 +22182,84 @@ try {
 
 /***/ }),
 
+/***/ "./resources/js/components/CollectionList.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/CollectionList.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CollectionList.vue?vue&type=template&id=13943187& */ "./resources/js/components/CollectionList.vue?vue&type=template&id=13943187&");
+/* harmony import */ var _CollectionList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollectionList.vue?vue&type=script&lang=js& */ "./resources/js/components/CollectionList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CollectionList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CollectionList.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Collections.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Collections.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Collections.vue?vue&type=template&id=2adc4dfa& */ "./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa&");
+/* harmony import */ var _Collections_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Collections.vue?vue&type=script&lang=js& */ "./resources/js/components/Collections.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Collections_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Collections.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -22152,6 +22689,38 @@ component.options.__file = "resources/js/components/SignUp.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/CollectionList.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/CollectionList.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CollectionList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Collections.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Collections.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Collections_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Collections.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Collections_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -22325,6 +22894,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SignUp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SignUp.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SignUp.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SignUp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CollectionList.vue?vue&type=template&id=13943187&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/CollectionList.vue?vue&type=template&id=13943187& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CollectionList_vue_vue_type_template_id_13943187___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CollectionList.vue?vue&type=template&id=13943187& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=template&id=13943187&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Collections_vue_vue_type_template_id_2adc4dfa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Collections.vue?vue&type=template&id=2adc4dfa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa&");
+
 
 /***/ }),
 
@@ -22515,6 +23118,184 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=template&id=13943187&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CollectionList.vue?vue&type=template&id=13943187& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass:
+          "relative group text-center border-2 border-blue-500 rounded bg-gradient-to-b from-white to-gray-50",
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "flex align-items-center justify-center py-4 overflow-hidden",
+          },
+          [
+            _c(
+              "router-link",
+              { attrs: { to: { path: "/pokemon/details/" + _vm.pokemon.id } } },
+              [
+                _c("img", {
+                  staticClass: "h-fit w-auto",
+                  attrs: {
+                    src: _vm.img_sourse + _vm.pokemon.id + ".png",
+                    alt: _vm.pokemon.name,
+                  },
+                }),
+                _vm._v(" "),
+                _c(
+                  "small",
+                  {
+                    staticClass:
+                      "uppercase text-gray-700 truncate font-semibold",
+                  },
+                  [_vm._v(_vm._s(_vm.pokemon.name))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "group-hover:bg-gray-800 group-hover:bg-opacity-20 absolute h-[100%] w-[100%] top-0 left-0 z-10 rounded flex justify-center items-center",
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "h-0 w-0 group-hover:h-10 group-hover:w-10 text-white group-hover:bg-[#48CFAD] p-2 rounded-full transition ease-in-out",
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "hidden group-hover:block",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              fill: "none",
+                              stroke: "currentColor",
+                              "stroke-width": "2",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                            },
+                          },
+                          [
+                            _c("path", { attrs: { d: "M10 17l5-5-5-5" } }),
+                            _c("path", {
+                              attrs: { d: "M13.8 12H3m9 10a10 10 0 1 0 0-20" },
+                            }),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
+            ),
+          ],
+          1
+        ),
+      ]
+    ),
+    _vm._v(
+      "\n    " +
+        _vm._s(
+          _vm.pokemon.like === 1
+            ? "You liked this pokemon"
+            : _vm.pokemon.loved === 1
+            ? "You loved this pokemon"
+            : "You hate this pokemon"
+        ) +
+        "\n"
+    ),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Collections.vue?vue&type=template&id=2adc4dfa& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("navigation-bar"),
+      _vm._v(" "),
+      _c("div", { staticClass: "px-4 sm:px-2 container mx-auto mt-12" }, [
+        _c("h2", { staticClass: "text-blue-700 text-xl font-semibold" }, [
+          _vm._v("Pokemon Collections"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 2xs:gap-6 md:gap-4 my-5",
+          },
+          _vm._l(_vm.pokemons, function (pokemon, index) {
+            return _c(
+              "div",
+              { key: index, staticClass: "mt-0 relative group" },
+              [
+                _c("collection-list", {
+                  attrs: { pokemon: pokemon, img_sourse: _vm.imgUrl },
+                }),
+              ],
+              1
+            )
+          }),
+          0
+        ),
+      ]),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -22673,7 +23454,7 @@ var render = function () {
                               "router-link",
                               {
                                 staticClass:
-                                  "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded \n                                md:bg-transparent md:text-blue-700 md:p-0 dark:text-white",
+                                  "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 \n                                hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 \n                                md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white \n                                md:dark:hover:bg-transparent dark:border-gray-700",
                                 attrs: { to: { path: "/home" } },
                               },
                               [_vm._v("Home")]
@@ -22682,7 +23463,21 @@ var render = function () {
                           1
                         ),
                         _vm._v(" "),
-                        _vm._m(1),
+                        _c(
+                          "li",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass:
+                                  "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 \n                                hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 \n                                md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white \n                                md:dark:hover:bg-transparent dark:border-gray-700",
+                                attrs: { to: { path: "/my-collections" } },
+                              },
+                              [_vm._v("My Collections")]
+                            ),
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "li",
@@ -22806,22 +23601,6 @@ var staticRenderFns = [
       ),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass:
-            "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 \n                                hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 \n                                md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white \n                                md:dark:hover:bg-transparent dark:border-gray-700",
-          attrs: { href: "#" },
-        },
-        [_vm._v("My Collections")]
-      ),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -22921,6 +23700,26 @@ var render = function () {
                 "button",
                 {
                   staticClass:
+                    "text-white bg-green-500 border-2 border-green-500 hover:border-green-600 hover:text-white hover:bg-green-600 focus:ring-4 focus:outline-none \n                        focus:ring-green-300 font-medium rounded px-5 py-1 text-center mr-1 dark:bg-green-600 \n                        dark:hover:bg-green-600 dark:focus:ring-green-600",
+                  attrs: { disabled: this.isAddToFavorate ? true : false },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.addToFavorate.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _vm._v(
+                    _vm._s(this.isAddToFavorate ? "..." : "Add to Favorate")
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
                     "text-white bg-blue-700 border-2 border-blue-700 hover:border-blue-800 hover:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none \n                        focus:ring-blue-300 font-medium rounded px-5 py-1 text-center mr-1 dark:bg-blue-800 \n                        dark:hover:bg-blue-800 dark:focus:ring-blue-800",
                   attrs: { disabled: this.isLikeSubmitted ? true : false },
                   on: {
@@ -22975,6 +23774,40 @@ var render = function () {
                         [
                           _c("path", {
                             attrs: {
+                              d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(this.usersLovedThisPokemon.length) +
+                          "\n                        "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex items-center justify-between pl-10" },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-4 mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 24 24",
+                            fill: "none",
+                            stroke: "#000000",
+                            "stroke-width": "2",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                          },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
                               d: "M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3",
                             },
                           }),
@@ -22990,7 +23823,7 @@ var render = function () {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "flex items-center justify-between pl-12" },
+                    { staticClass: "flex items-center justify-between pl-10" },
                     [
                       _c(
                         "svg",
@@ -23031,6 +23864,49 @@ var render = function () {
           _c("div", { staticClass: "w-full sm:w-[40%] md:w-[20%] mr-6" }, [
             _c("h4", { staticClass: "text-gray-700 text-lg font-semibold" }, [
               _vm._v(
+                "\n                    People who loves:\n                "
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "bg-white text-gray-700 py-1 px-2 rounded border border-gray-200 my-4",
+              },
+              [
+                !this.usersLovedThisPokemon.length
+                  ? _c("span", { staticClass: "text-muted text-center" }, [
+                      _vm._v("- None -"),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(this.usersLovedThisPokemon, function (user, index) {
+                  return _c("div", { key: index }, [
+                    _c("span", [
+                      _vm._v(
+                        "- " +
+                          _vm._s(
+                            user.user_id === user.user_id
+                              ? "You love this pokemon"
+                              : user.firstname +
+                                  " " +
+                                  user.lastname +
+                                  " loved this pokemon"
+                          )
+                      ),
+                    ]),
+                    _c("br"),
+                  ])
+                }),
+              ],
+              2
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-full sm:w-[40%] md:w-[20%] mr-6" }, [
+            _c("h4", { staticClass: "text-gray-700 text-lg font-semibold" }, [
+              _vm._v(
                 "\n                    People who likes:\n                "
               ),
             ]),
@@ -23052,7 +23928,15 @@ var render = function () {
                   return _c("div", { key: index }, [
                     _c("span", [
                       _vm._v(
-                        "- " + _vm._s(user.firstname + " " + user.lastname)
+                        "- " +
+                          _vm._s(
+                            user.user_id === user.user_id
+                              ? "You like this pokemon"
+                              : user.firstname +
+                                  " " +
+                                  user.lastname +
+                                  " like this pokemon"
+                          )
                       ),
                     ]),
                     _c("br"),
@@ -23087,7 +23971,15 @@ var render = function () {
                   return _c("div", { key: index }, [
                     _c("span", [
                       _vm._v(
-                        "- " + _vm._s(user.firstname + " " + user.lastname)
+                        "- " +
+                          _vm._s(
+                            user.user_id === user.user_id
+                              ? "You hate this pokemon"
+                              : user.firstname +
+                                  " " +
+                                  user.lastname +
+                                  " hate this pokemon."
+                          )
                       ),
                     ]),
                     _c("br"),
@@ -23642,9 +24534,7 @@ var render = function () {
                   _vm._m(0),
                   _vm._v(" "),
                   _c("div", { staticClass: "mt-14 grid" }, [
-                    _c("label", { attrs: { for: "email" } }, [
-                      _vm._v("Username"),
-                    ]),
+                    _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [

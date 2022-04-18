@@ -8,9 +8,9 @@ use App\Models\User;
 
 class ProfileContoller extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $info = User::findOrFail(Auth::id());
+        $info = User::findOrFail($request->user_id);
         return response()->json(['info' => $info]);
     }
 
@@ -22,7 +22,7 @@ class ProfileContoller extends Controller
             'dateOfBirth' => ['required'],
         ]);
 
-        User::where('id', Auth::id())
+        User::where('id', $request->user_id)
             ->update([
                 'firstname' => $request->firstname,
                 'lastname' => $request->lastname,

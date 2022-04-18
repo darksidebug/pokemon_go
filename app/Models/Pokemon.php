@@ -16,6 +16,7 @@ class Pokemon extends Model
         'pokemon_id',
         'name',
         'isLike',
+        'isFavorate',
         'user_id'
     ];
 
@@ -27,6 +28,11 @@ class Pokemon extends Model
     public static function countDislikes()
     {
         return self::where('isLike', 2)->count();
+    }
+
+    public static function countFavorates()
+    {
+        return self::where('isFavorate', 1)->count();
     }
 
     public function pokemons()

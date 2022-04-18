@@ -9,7 +9,7 @@
                             <h2 class="mb-8 text-2xl text-cyan-900 font-bold">Please sign in to <br>continue.</h2>
                         </div>
                         <div class="mt-14 grid">
-                            <label for="email" >Username</label>
+                            <label for="email" >Email</label>
                             <input v-model="form.email" name="email" type="email" class='border-2 border-blue-800 rounded py-2 px-4 outline-0' placeholder='Enter email...' />
                             <span v-if="errors.email" class="text-red-500">{{ errors.email[0] }}</span>
 
@@ -57,9 +57,10 @@ export default {
 
             await axios.post('/api/login', this.form)
             .then((res) => {
-
+                console.log(res)
                 if(res.status === 200 && res.statusText === 'OK'){
 
+                    localStorage.setItem('token', res.data);
                     this.$router.push({path: '/home'});
                 }
             })
@@ -68,7 +69,15 @@ export default {
                 console.log(error)
                 this.errors = error.response.data.errors;
             })
+        },
+        async getSanctumCSRFCookie(){
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                console.log(response)
+            })
         }
+    },
+    created() {
+        this.getSanctumCSRFCookie()
     },
 }
 </script>

@@ -51,7 +51,8 @@ export default {
             },
             form:{
                 searchInput: null
-            }
+            },
+            token: localStorage.getItem('token')
         }
     },
     methods: {
@@ -124,6 +125,8 @@ export default {
         }
     },
     async created(){
+        // window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+        // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpsRequest';
         await this.fetchPokemonData();
     }
 }

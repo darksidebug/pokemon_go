@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class LoginUserController extends Controller
@@ -15,17 +17,20 @@ class LoginUserController extends Controller
             'password' => ['required']
         ]);
 
-        if(Auth::attempt($request->only('email', 'password'))){
-            return response()->json(Auth::user(), 200);
+        $user = User::where('email', $request->email)->first();
+ 
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
         }
-
-        throw ValidationException::withMessages([
-            'email' => ['Invalid user credentials.']
-        ]);
+    
+        return $user->createToken($request->email)->plainTextToken;
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['status' => 200, 'statusText' => 'OK', 'message' => 'logout']);
     }
 }

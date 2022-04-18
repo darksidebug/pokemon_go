@@ -50,12 +50,14 @@ export default {
     },
     data() {
         return {
+            id: null,
             email: null,
             firstname: null,
             lastname: null,
             birthdate: null,
             submitting: false,
             form: {
+                user_id: null,
                 firstname: '',
                 lastname: '',
                 dateOfBirth: '',
@@ -64,9 +66,23 @@ export default {
         }
     },
     methods: {
-        async getMyInfo(){
-            await axios.get('/api/my-profile')
+        async getAuthenticatedUser(){
+            await axios.get('/api/user')
             .then((res) => {
+
+                this.id = res.data.id;
+            })
+            .catch((error) => {
+                console.log(error)
+                alert('Warning: Please contact the developer.')
+            })
+        },
+        async getMyInfo(){
+
+            await axios.post('/api/my-profile',{user_id: this.id})
+            .then((res) => {
+                console.log(res)
+                this.form.user_id = res.data.info.id
                 this.email = res.data.info.email;
                 this.firstname = res.data.info.firstname
                 this.lastname = res.data.info.lastname
@@ -81,21 +97,25 @@ export default {
             this.submitting = true;
             await axios.post('/api/update-my-profile', this.form)
             .then((res) => {
-
+                
                 if(res.status === 200 && res.statusText === 'OK')
                 {
                     this.submitting = false;
+                    alert('Profile updated.')
                     this.getMyInfo();
                 }
+
+                console.log(this.form)
             })
             .catch((error) => {
                 console.log(error)
                 this.submitting = false;
-                alert('Warning: Please contact the developer.')
+                this.errors = error.response.data.errors;
             })
         }
     },
     async created() {
+        await this.getAuthenticatedUser();
         await this.getMyInfo();
     },
 }

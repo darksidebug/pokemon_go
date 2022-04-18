@@ -29,14 +29,20 @@ Route::middleware('auth:sanctum')->get('/authenticate', function () {
     ]);
 });
 
+
+
 Route::post('register', [RegisterUserController::class, 'index']);
 Route::post('login', [LoginUserController::class, 'index']);
-Route::post('sign-out', [LoginUserController::class, 'logout']);
+Route::post('sign-out', [LoginUserController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('add-to-like', [PokemonContoller::class, 'addPokemonToLikes']);
 Route::post('add-to-dislike', [PokemonContoller::class, 'addPokemonToDislikes']);
+Route::post('add-to-favorate', [PokemonContoller::class, 'addPokemonToFavorate']);
 Route::post('change-to-dislike', [PokemonContoller::class, 'changePokemonToDislikes']);
 Route::post('change-to-like', [PokemonContoller::class, 'changePokemonToLikes']);
+Route::post('change-to-favorate', [PokemonContoller::class, 'changePokemonToFavorate']);
 Route::post('users-liked-this-pokemon', [PokemonContoller::class, 'getUserLikePokemons']);
 Route::post('users-disliked-this-pokemon', [PokemonContoller::class, 'getUserDislikePokemons']);
-Route::get('my-profile', [ProfileContoller::class, 'index']);
+Route::post('users-love-this-pokemon', [PokemonContoller::class, 'getUserFavoratePokemons']);
+Route::post('my-collections', [PokemonContoller::class, 'myCollections']);
+Route::post('my-profile', [ProfileContoller::class, 'index']);
 Route::post('update-my-profile', [ProfileContoller::class, 'updateInfo']);

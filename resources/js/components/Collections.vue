@@ -1,19 +1,85 @@
 <template>
-    <div class='px-4 sm:px-2 container mx-auto mt-12'>
-
-        <div class='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 2xs:gap-6 md:gap-4 my-3'>
-            <div v-for="(pokemon, index) in pokemons" :key="index" class="mt-0 relative group">
-                <lists-of-pokemon :pokemon="pokemon" :url="apiUrl" :img_sourse="imgUrl" />
+    <div>
+        <navigation-bar />
+        
+        <div class='px-4 sm:px-2 container mx-auto mt-12'>
+            <h2 class="text-blue-700 text-xl font-semibold">Pokemon Collections</h2>
+            <div class='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 2xs:gap-6 md:gap-4 my-5'>
+                <div v-for="(pokemon, index) in pokemons" :key="index" class="mt-0 relative group">
+                    <collection-list :pokemon="pokemon" :img_sourse="imgUrl" />
+                </div>
             </div>
-        </div>
-
-        <div class="mt-10 flex flex-wrap justify-start items-center">
-            <button :disabled="prevUrl == null ? true : false" class="text-white bg-blue-700 border-2 border-blue-700 hover:border-blue-800 hover:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none 
-                            focus:ring-blue-300 font-medium rounded px-5 py-2 text-center mr-1 dark:bg-blue-800 
-                            dark:hover:bg-blue-800 dark:focus:ring-blue-800">Previous</button>
-            <button :disabled="nxtUrl == null ? true : false" class="text-white bg-blue-700 border-2 border-blue-700 hover:border-blue-800 hover:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none 
-                            focus:ring-blue-300 font-medium rounded px-5 py-2 text-center mr-1 dark:bg-blue-800 
-                            dark:hover:bg-blue-800 dark:focus:ring-blue-800">Next</button>
         </div>
     </div>
 </template>
+<script>
+import CollectionLists from './CollectionList'
+import Navbar from './Navbar'
+
+export default {
+    components: {
+        'collection-list' : CollectionLists,
+        'navigation-bar': Navbar
+    },
+    data(){
+        return{
+            apiUrl: process.env.MIX_API_URI_LINK,
+            imgUrl: process.env.MIX_IMG_URI_LINK,
+            pokemons: [],
+            id: null
+        }
+    },
+    methods: {
+        async getAuthenticatedUser(){
+            await axios.get('/api/user')
+            .then((res) => {
+
+                this.id = res.data.id;
+            })
+            .catch((error) => {
+                console.log(error)
+                alert('Warning: Please contact the developer.')
+            })
+        },
+        async fetchPokemonCollection() {
+            await axios.post('api/my-collections', {user_id: this.id})
+            .then((res) => {
+
+                if(res.status === 200){
+                    res.data.pokemons.forEach(pokemon => {
+                        this.pokemons.push({id: '', name: '', pokemon_id: pokemon.pokemon_id, like: pokemon.isLike, loved: pokemon.isFavorate})
+                        this.fetchPokemonDetails(pokemon.pokemon_id)
+                    })
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+        async fetchPokemonDetails(id){
+            await axios.get(this.apiUrl + 'pokemon/' + id)
+            .then((res) => {
+
+                if(res.status === 200){
+                    this.pokemons.forEach(pokemon => {
+
+                        if(pokemon.pokemon_id === res.data.id){
+                            pokemon.id = res.data.id
+                            pokemon.name = res.data.name
+                            
+                        }
+                    })
+                }
+                console.log(this.pokemons)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
+    },
+    async created() {
+        await this.getAuthenticatedUser()
+        await this.fetchPokemonCollection()
+    },
+}
+</script>

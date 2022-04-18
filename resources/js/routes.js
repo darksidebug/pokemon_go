@@ -4,6 +4,7 @@ import Home from './components/Home';
 import PageNoteFound from './components/PageNotFound';
 import PokemonDetails from './components/PokemonDetails';
 import MyProfile from './components/Profile';
+import Collections from './components/Collections'
 
 export default{
     mode: 'history',
@@ -14,7 +15,8 @@ export default{
         },
         {
             path: '/',
-            component: SignIn
+            component: SignIn,
+            beforeEnter: checkLoginToken
         },
         {
             path: '/sign-up',
@@ -30,24 +32,37 @@ export default{
             component: PokemonDetails,
             beforeEnter: routeGuard
         },
-        ,
         {
             path: '/my-profile',
             component: MyProfile,
+            beforeEnter: routeGuard
+        },
+        {
+            path: '/my-collections',
+            component: Collections,
             beforeEnter: routeGuard
         }
     ]
 }
 
 function routeGuard(to, from, next){
-    axios.get('/api/authenticate')
-    .then((res) => {
+    
+    const token = localStorage.getItem('token')
+    if(token === '' || token === undefined || token === null){
 
-        if(res.status === 200 && res.statusText === 'OK'){
-            next()
-        }
-    })
-    .catch(() => {
         return next({path: '/'})
-    })
+    }else{
+
+        next()
+    }
 }
+
+function checkLoginToken(to, from, next){
+    
+    const token = localStorage.getItem('token')
+    if(token !== '' || token !== undefined || token !== null){
+
+        return next({path: '/home'})
+    }
+}
+
